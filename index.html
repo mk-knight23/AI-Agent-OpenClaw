@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw | The Genesis Mainhead</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #020617;
+            --sidebar: #000;
+            --progenitor: #60a5fa;
+            --surface: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #64748b;
+            --border: rgba(94, 234, 212, 0.1);
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* UI-UX Pro Max: Genesis Sidebar */
+        aside {
+            width: 320px;
+            background: var(--sidebar);
+            border-right: 1px solid rgba(96, 165, 250, 0.2);
+            display: flex;
+            flex-direction: column;
+            padding: 3rem;
+            z-index: 100;
+        }
+
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--progenitor);
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .brand::after {
+            content: "MAINHEAD";
+            position: absolute;
+            bottom: -1rem;
+            left: 0;
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            color: var(--text-muted);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            color: var(--progenitor);
+        }
+
+        /* Main Scrollable Area */
+        main {
+            flex: 1;
+            overflow-y: auto;
+            padding: 6rem;
+            position: relative;
+        }
+
+        .genesis-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(96, 165, 250, 0.1);
+            border: 1px solid var(--progenitor);
+            border-radius: 4px;
+            font-size: 0.6rem;
+            font-weight: 800;
+            color: var(--progenitor);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 6rem;
+            font-weight: 800;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .hero-desc {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            font-weight: 300;
+            margin-bottom: 6rem;
+        }
+
+        /* RALPH Protocol Visualization */
+        .ralph-container {
+            margin-top: 8rem;
+        }
+
+        .ralph-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 4rem;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2rem;
+        }
+
+        .ralph-node {
+            text-align: center;
+        }
+
+        .ralph-letter {
+            font-family: 'JetBrains Mono';
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--progenitor);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .ralph-label {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .ralph-detail {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* High-Density Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 6rem;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--progenitor);
+        }
+
+        .stat-val {
+            font-family: 'JetBrains Mono';
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-lab {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .icon-svg {
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            width: 20px;
+            height: 20px;
+        }
+
+        [data-reveal] {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        [data-reveal].active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Interactive Map Overlay */
+        .repo-map {
+            margin-top: 8rem;
+            padding: 4rem;
+            background: #000;
+            border-radius: 24px;
+            border: 1px dashed var(--border);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .repo-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--progenitor);
+            border-radius: 50%;
+            position: absolute;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside>
+        <div class="brand">OPENCLAW</div>
+
+        <div style="flex: 1; margin-top: 4rem;">
+            <a href="#progenitor" class="nav-item active">
+                <svg class="icon-svg">
+                    <path d="M12 2v20" />
+                    <path d="m17 5-5-3-5 3" />
+                    <path d="M2 12h20" />
+                </svg>
+                Progenitor
+            </a>
+            <a href="#ralph" class="nav-item">
+                <svg class="icon-svg">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                RALPH v2
+            </a>
+            <a href="#portfolio" class="nav-item">
+                <svg class="icon-svg">
+                    <rect width="18" height="18" x="3" y="3" rx="2" />
+                    <path d="M3 9h18" />
+                    <path d="M9 21V9" />
+                </svg>
+                60-Repo Matrix
+            </a>
+            <a href="#evolution" class="nav-item">
+                <svg class="icon-svg">
+                    <path d="m16 16 3-8 3 8c-.87.62-1.92 1-3 1s-2.13-.38-3-1Z" />
+                    <path d="m2 16 3-8 3 8c-.87.62-1.92 1-3 1s-2.13-.38-3-1Z" />
+                    <path d="M7 21h10" />
+                    <path d="M12 21v-2" />
+                </svg>
+                Lineage Links
+            </a>
+        </div>
+
+        <a href="../index.html" class="nav-item"
+            style="color: var(--progenitor); border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem;">
+            <svg class="icon-svg">
+                <path d="m12 19-7-7 7-7" />
+                <path d="M19 12H5" />
+            </svg>
+            Genesis Portal
+        </a>
+    </aside>
+
+    <main>
+        <div class="genesis-badge" data-reveal>Sector: Root / Genesis</div>
+        <h1 data-reveal style="transition-delay: 0.1s">The Orchestration<br>Authority.</h1>
+        <p class="hero-desc" data-reveal style="transition-delay: 0.2s">OpenClaw is the foundational mainhead of the
+            ecosystem. It provides the centralized reasoning and RALPH enforcement for the entire 64-project portfolio.
+        </p>
+
+        <section id="ralph" class="ralph-container">
+            <h2
+                style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.4em; color: var(--text-muted); margin-bottom: 4rem;">
+                [ RALPH PROTOCOL V2.2 ]</h2>
+            <div class="ralph-card" data-reveal>
+                <div class="ralph-node">
+                    <div class="ralph-letter">R</div>
+                    <div class="ralph-label">Research</div>
+                    <div class="ralph-detail">Deep scan of KI artifacts and repo history. [RALPH_V2.md]</div>
+                </div>
+                <div class="ralph-node">
+                    <div class="ralph-letter">A</div>
+                    <div class="ralph-label">Architect</div>
+                    <div class="ralph-detail">Multi-node sync via Tailscale. [A2UI_CANVAS.md]</div>
+                </div>
+                <div class="ralph-node">
+                    <div class="ralph-letter">L</div>
+                    <div class="ralph-label">Log</div>
+                    <div class="ralph-detail">Continuous state in task.md.</div>
+                </div>
+                <div class="ralph-node">
+                    <div class="ralph-letter">P</div>
+                    <div class="ralph-label">Perform</div>
+                    <div class="ralph-detail">Execution via UI-UX Pro Max.</div>
+                </div>
+                <div class="ralph-node">
+                    <div class="ralph-letter">H</div>
+                    <div class="ralph-label">Harvest</div>
+                    <div class="ralph-detail">Recursive feedback loop optimization.</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="stats-grid">
+            <div class="stat-item" data-reveal>
+                <div class="stat-val">1.2k+</div>
+                <div class="stat-lab">GitHub Contributors</div>
+            </div>
+            <div class="stat-item" data-reveal style="transition-delay: 0.1s">
+                <div class="stat-val">59</div>
+                <div class="stat-lab">Official Releases</div>
+            </div>
+            <div class="stat-item" data-reveal style="transition-delay: 0.2s">
+                <div class="stat-val">22</div>
+                <div class="stat-lab">Core Integration Channels</div>
+            </div>
+        </section>
+
+        <section class="repo-map" data-reveal>
+            <div style="position: relative; z-index: 10;">
+                <h2 style="font-size: 2rem; margin-bottom: 1rem;">Distributed Sync Matrix</h2>
+                <p style="color: var(--text-muted); max-width: 500px;">Every dot represents a repository sync node
+                    managed by OpenClaw's primary orchestration engine.</p>
+            </div>
+            <div id="dot-field"></div>
+        </section>
+
+        <footer>
+            <div
+                style="display: flex; justify-content: space-between; margin-top: 10rem; color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em;">
+                <span>OPENCLAW SYSTEM • PROGENITOR V2.2</span>
+                <span>MK-KNIGHT23 • GENESIS_AUTHORIZED</span>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+
+        // Generate Repo Dots for the Matrix
+        const dotField = document.getElementById('dot-field');
+        for (let i = 0; i < 64; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'repo-dot';
+            dot.style.top = Math.random() * 100 + '%';
+            dot.style.left = Math.random() * 100 + '%';
+            dotField.appendChild(dot);
+        }
+    </script>
+</body>
+
+</html>
