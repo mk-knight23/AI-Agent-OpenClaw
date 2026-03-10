@@ -232,6 +232,64 @@
             position: absolute;
             opacity: 0.3;
         }
+
+        /* Skills + Workflows Upgrade Sections */
+        .oc-section {
+            margin-top: 8rem;
+            padding-top: 4rem;
+            border-top: 1px solid rgba(96, 165, 250, 0.15);
+        }
+        .oc-section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+        .oc-skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        .oc-skill-chip {
+            padding: 0.5rem 1.25rem;
+            background: rgba(96, 165, 250, 0.06);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-main);
+            letter-spacing: 0.05em;
+        }
+        .oc-skill-chip.is-new {
+            border-color: var(--progenitor);
+            color: var(--progenitor);
+            background: rgba(96, 165, 250, 0.12);
+        }
+        .oc-skill-chip.is-new::after { content: " ✦"; }
+        .oc-workflow-list {
+            display: flex;
+            flex-direction: column;
+        }
+        .oc-workflow-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid rgba(96, 165, 250, 0.08);
+            font-size: 0.85rem;
+        }
+        .oc-workflow-trigger {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            background: rgba(255,255,255,0.03);
+            padding: 0.3rem 0.75rem;
+            border-radius: 3px;
+        }
+        .oc-workflow-item.is-new .oc-workflow-name::after { content: " ✦"; color: var(--progenitor); font-size: 0.65rem; }
     </style>
 </head>
 
@@ -349,10 +407,47 @@
             <div id="dot-field"></div>
         </section>
 
+        <section class="oc-section" data-reveal>
+            <div class="oc-section-label">[ SKILLS LIBRARY — V2.3 ]</div>
+            <div class="oc-skills-grid">
+                <span class="oc-skill-chip">job-hunter</span>
+                <span class="oc-skill-chip">repo-modernizer</span>
+                <span class="oc-skill-chip">portfolio-manager</span>
+                <span class="oc-skill-chip">content-creator</span>
+                <span class="oc-skill-chip">deploy-everywhere</span>
+                <span class="oc-skill-chip">code-reviewer</span>
+                <span class="oc-skill-chip">data-pipeline</span>
+                <span class="oc-skill-chip">doc-generator</span>
+                <span class="oc-skill-chip">add-telegram</span>
+                <span class="oc-skill-chip">add-gmail</span>
+                <span class="oc-skill-chip">add-slack</span>
+                <span class="oc-skill-chip">add-obsidian</span>
+                <span class="oc-skill-chip is-new">iot-monitor</span>
+                <span class="oc-skill-chip is-new">security-scanner</span>
+                <span class="oc-skill-chip is-new">batch-processor</span>
+            </div>
+        </section>
+
+        <section class="oc-section" data-reveal style="transition-delay: 0.1s">
+            <div class="oc-section-label">[ ACTIVE WORKFLOWS ]</div>
+            <div class="oc-workflow-list">
+                <div class="oc-workflow-item"><span class="oc-workflow-name">daily-standup</span><span class="oc-workflow-trigger">DAILY 09:00</span></div>
+                <div class="oc-workflow-item"><span class="oc-workflow-name">job-outreach</span><span class="oc-workflow-trigger">MON 08:00</span></div>
+                <div class="oc-workflow-item"><span class="oc-workflow-name">repo-upgrade</span><span class="oc-workflow-trigger">SUN 02:00</span></div>
+                <div class="oc-workflow-item"><span class="oc-workflow-name">hr-campaign</span><span class="oc-workflow-trigger">MON 08:00</span></div>
+                <div class="oc-workflow-item"><span class="oc-workflow-name">cd-trigger</span><span class="oc-workflow-trigger">ON PUSH</span></div>
+                <div class="oc-workflow-item"><span class="oc-workflow-name">content-publishing</span><span class="oc-workflow-trigger">WED 08:00</span></div>
+                <div class="oc-workflow-item"><span class="oc-workflow-name">ci-security-gate</span><span class="oc-workflow-trigger">ON PR</span></div>
+                <div class="oc-workflow-item"><span class="oc-workflow-name">portfolio-validation</span><span class="oc-workflow-trigger">WEEKLY</span></div>
+                <div class="oc-workflow-item is-new"><span class="oc-workflow-name">heartbeat-tasks</span><span class="oc-workflow-trigger">CONTINUOUS</span></div>
+                <div class="oc-workflow-item is-new"><span class="oc-workflow-name">batch-validation</span><span class="oc-workflow-trigger">PRE-SEND</span></div>
+            </div>
+        </section>
+
         <footer>
             <div
-                style="display: flex; justify-content: space-between; margin-top: 10rem; color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em;">
-                <span>OPENCLAW SYSTEM • PROGENITOR V2.2</span>
+                style="display: flex; justify-content: space-between; margin-top: 6rem; color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em;">
+                <span>OPENCLAW SYSTEM • PROGENITOR V2.3 • 15 SKILLS • 10 WORKFLOWS</span>
                 <span>MK-KNIGHT23 • GENESIS_AUTHORIZED</span>
             </div>
         </footer>
