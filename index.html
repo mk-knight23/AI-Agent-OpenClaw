@@ -4,611 +4,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenClaw | The Genesis Mainhead</title>
+    <title>OpenClaw | The Orchestration Authority</title>
+    <meta name="description"
+        content="OpenClaw is the foundational orchestration brain of the AI-CLAW-ECOSYSTEM, enforcing RALPH protocols across a distributed matrix of specialized agents.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet">
 
     <style>
         :root {
-            --bg: #020617;
-            --sidebar: #000;
-            --progenitor: #60a5fa;
-            --surface: #0f172a;
-            --text-main: #f8fafc;
-            --text-muted: #64748b;
-            --border: rgba(94, 234, 212, 0.1);
-            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            --bg-primary: #020617;
+            --bg-secondary: #0f172a;
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.4);
+            --text-primary: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(56, 189, 248, 0.3);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --radius-md: 12px;
+            --radius-lg: 24px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
 
         body {
-            background-color: var(--bg);
-            color: var(--text-main);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
             font-family: 'Inter', sans-serif;
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* UI-UX Pro Max: Genesis Sidebar */
-        aside {
-            width: 320px;
-            background: var(--sidebar);
-            border-right: 1px solid rgba(96, 165, 250, 0.2);
-            display: flex;
-            flex-direction: column;
-            padding: 3rem;
-            z-index: 100;
-        }
-
-        .brand {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--progenitor);
-            margin-bottom: 4rem;
-            position: relative;
-        }
-
-        .brand::after {
-            content: "MAINHEAD";
-            position: absolute;
-            bottom: -1rem;
-            left: 0;
-            font-size: 0.6rem;
-            letter-spacing: 0.3em;
-            color: var(--text-muted);
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 0;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            transition: var(--transition);
-            text-decoration: none;
-        }
-
-        .nav-item:hover,
-        .nav-item.active {
-            color: var(--progenitor);
-        }
-
-        /* Main Scrollable Area */
-        main {
-            flex: 1;
-            overflow-y: auto;
-            padding: 6rem;
-            position: relative;
-        }
-
-        .genesis-badge {
-            display: inline-block;
-            padding: 0.4rem 1rem;
-            background: rgba(96, 165, 250, 0.1);
-            border: 1px solid var(--progenitor);
-            border-radius: 4px;
-            font-size: 0.6rem;
-            font-weight: 800;
-            color: var(--progenitor);
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-        }
-
-        h1 {
-            font-size: 6rem;
-            font-weight: 800;
-            line-height: 0.9;
-            margin-bottom: 2rem;
-        }
-
-        .hero-desc {
-            font-size: 1.5rem;
-            color: var(--text-muted);
-            max-width: 700px;
-            font-weight: 300;
-            margin-bottom: 6rem;
-        }
-
-        /* RALPH Protocol Visualization */
-        .ralph-container {
-            margin-top: 8rem;
-        }
-
-        .ralph-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 4rem;
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 2rem;
-        }
-
-        .ralph-node {
-            text-align: center;
-        }
-
-        .ralph-letter {
-            font-family: 'JetBrains Mono';
-            font-size: 5rem;
-            font-weight: 800;
-            color: var(--progenitor);
-            line-height: 1;
-            margin-bottom: 1rem;
-        }
-
-        .ralph-label {
-            font-size: 0.75rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
-
-        .ralph-detail {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
-
-        /* High-Density Stats */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 6rem;
-        }
-
-        .stat-item {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 2.5rem;
-            border-radius: 16px;
-            border-left: 4px solid var(--progenitor);
-        }
-
-        .stat-val {
-            font-family: 'JetBrains Mono';
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-lab {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .icon-svg {
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2;
-            width: 20px;
-            height: 20px;
-        }
-
-        [data-reveal] {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: var(--transition);
-        }
-
-        [data-reveal].active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Interactive Map Overlay */
-        .repo-map {
-            margin-top: 8rem;
-            padding: 4rem;
-            background: #000;
-            border-radius: 24px;
-            border: 1px dashed var(--border);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .repo-dot {
-            width: 4px;
-            height: 4px;
-            background: var(--progenitor);
-            border-radius: 50%;
-            position: absolute;
-            opacity: 0.3;
-        }
-
-        /* Capabilities & Orchestration: The Triple-Column Matrix */
-        .capabilities-matrix {
-            margin-top: 10rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 4rem;
-        }
-
-        .cap-col-header {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.4em;
-            color: var(--progenitor);
-            margin-bottom: 2.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .cap-col-header::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(to right, var(--progenitor), transparent);
-        }
-
-        /* Skills Column: Fluid Chips */
-        .skills-cloud {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-        }
-
-        .skill-node {
-            padding: 0.5rem 1rem;
-            background: rgba(96, 165, 250, 0.03);
-            border: 1px solid rgba(96, 165, 250, 0.15);
-            border-radius: 4px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            transition: var(--transition);
-            cursor: default;
-        }
-
-        .skill-node:hover {
-            border-color: var(--progenitor);
-            color: var(--text-main);
-            background: rgba(96, 165, 250, 0.1);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(96, 165, 250, 0.15);
-        }
-
-        .skill-node.is-active {
-            border-color: var(--progenitor);
-            color: var(--progenitor);
-            background: rgba(96, 165, 250, 0.08);
-        }
-
-        /* Workflows Column: Execution Line */
-        .workflow-timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .flow-card {
-            padding-left: 1.5rem;
-            border-left: 1px solid rgba(96, 165, 250, 0.2);
-            position: relative;
-        }
-
-        .flow-card::before {
-            content: "";
-            position: absolute;
-            left: -4px;
-            top: 0;
-            width: 7px;
-            height: 7px;
-            background: var(--progenitor);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--progenitor);
-        }
-
-        .flow-name {
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-        }
-
-        .flow-trigger {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.6rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-
-        /* Use-Cases Column: Feature Core */
-        .use-case-card {
-            background: linear-gradient(135deg, rgba(96, 165, 250, 0.05), transparent);
-            border: 1px solid rgba(96, 165, 250, 0.2);
-            border-radius: 16px;
-            padding: 2.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .use-case-card::after {
-            content: "FEATURED";
-            position: absolute;
-            top: 1.5rem;
-            right: -2rem;
-            background: var(--progenitor);
-            color: #000;
-            font-size: 0.5rem;
-            font-weight: 900;
-            padding: 0.3rem 3rem;
-            transform: rotate(45deg);
-        }
-
-        .use-case-title {
-            font-size: 1.25rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: var(--progenitor);
-        }
-
-        .use-case-desc {
-            font-size: 0.85rem;
-            color: var(--text-muted);
+            overflow-x: hidden;
             line-height: 1.6;
         }
 
-        .use-case-tags {
-            margin-top: 1.5rem;
-            display: flex;
-            gap: 0.5rem;
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; position: relative; }
+
+        /* Ambient Background */
+        .matrix-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 0%, rgba(15, 23, 42, 0.8) 0%, rgba(2, 6, 23, 1) 100%);
+            z-index: -1;
         }
 
-        .tag-pill {
-            font-size: 0.6rem;
-            padding: 0.2rem 0.5rem;
-            background: rgba(255,255,255,0.05);
-            border-radius: 2px;
-            color: var(--text-muted);
+        .grid-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(56, 189, 248, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56, 189, 248, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px; z-index: -1;
+            mask-image: radial-gradient(ellipse at center, black, transparent 90%);
         }
 
-        .oc-section {
-            display: none; /* Replaced by matrix */
+        /* Navigation */
+        .sticky-nav {
+            position: sticky; top: 0; width: 100%; background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+            z-index: 1000; padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.1rem;
+            color: var(--text-primary); text-decoration: none;
+        }
+
+        .nav-logo span { color: var(--accent); }
+
+        .nav-links { display: flex; gap: 1.5rem; }
+
+        .nav-links a {
+            color: var(--text-muted); text-decoration: none; font-size: 0.85rem;
+            font-weight: 500; transition: var(--transition); font-family: 'JetBrains Mono', monospace;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Hero Section */
+        .hero { padding: 8rem 0 4rem; text-align: left; }
+
+        .hero-badge {
+            display: inline-flex; align-items: center; padding: 0.5rem 1.25rem;
+            background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 99px; font-size: 0.7rem; font-weight: 600; color: var(--accent);
+            text-transform: uppercase; letter-spacing: 0.25em; margin-bottom: 2.5rem;
+        }
+
+        .hero-title {
+            font-size: clamp(3.5rem, 8vw, 6rem); font-weight: 800; line-height: 1.05;
+            letter-spacing: -0.04em; margin-bottom: 2rem;
+        }
+
+        .hero-title span { color: var(--accent); }
+
+        .hero-desc { font-size: 1.25rem; color: var(--text-muted); max-width: 700px; margin-bottom: 3rem; }
+
+        /* Section Layouts */
+        .section { padding: 6rem 0; border-bottom: 1px solid var(--border); }
+
+        .section-tag {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent);
+            text-transform: uppercase; letter-spacing: 0.4em; display: block; margin-bottom: 1rem;
+        }
+
+        h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 2rem; letter-spacing: -0.02em; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+
+        .card {
+            background: rgba(15, 23, 42, 0.4); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 3rem; backdrop-filter: blur(8px);
+        }
+
+        /* Architect Style */
+        .architect-card { display: flex; justify-content: space-between; align-items: center; gap: 4rem; }
+
+        .stat-item { text-align: left; }
+
+        .stat-value { font-size: 2.5rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 0.25rem; }
+
+        .stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 600; }
+
+        /* Technical Specs */
+        .tech-list { list-style: none; margin-top: 2rem; }
+
+        .tech-item {
+            display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;
+        }
+
+        .tech-item::before { content: "→"; color: var(--accent); }
+
+        /* Animations */
+        [data-reveal] { opacity: 0; transform: translateY(20px); transition: var(--transition); }
+        [data-reveal].active { opacity: 1; transform: translateY(0); }
+
+        footer { padding: 4rem 0; text-align: center; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; }
+
+        @media (max-width: 1024px) {
+            .grid-2 { grid-template-columns: 1fr; gap: 3rem; }
+            .architect-card { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 
 <body>
+    <div class="matrix-bg"></div>
+    <div class="grid-overlay"></div>
 
-    <aside>
-        <div class="brand">OPENCLAW</div>
-
-        <div style="flex: 1; margin-top: 4rem;">
-            <a href="#progenitor" class="nav-item active">
-                <svg class="icon-svg">
-                    <path d="M12 2v20" />
-                    <path d="m17 5-5-3-5 3" />
-                    <path d="M2 12h20" />
-                </svg>
-                Progenitor
-            </a>
-            <a href="#ralph" class="nav-item">
-                <svg class="icon-svg">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 6v6l4 2" />
-                </svg>
-                RALPH v2
-            </a>
-            <a href="#portfolio" class="nav-item">
-                <svg class="icon-svg">
-                    <rect width="18" height="18" x="3" y="3" rx="2" />
-                    <path d="M3 9h18" />
-                    <path d="M9 21V9" />
-                </svg>
-                60-Repo Matrix
-            </a>
-            <a href="#evolution" class="nav-item">
-                <svg class="icon-svg">
-                    <path d="m16 16 3-8 3 8c-.87.62-1.92 1-3 1s-2.13-.38-3-1Z" />
-                    <path d="m2 16 3-8 3 8c-.87.62-1.92 1-3 1s-2.13-.38-3-1Z" />
-                    <path d="M7 21h10" />
-                    <path d="M12 21v-2" />
-                </svg>
-                Lineage Links
-            </a>
+    <nav class="sticky-nav">
+        <div class="nav-container">
+            <a href="https://mk-knight23.github.io/AI-CLAW-ECOSYSTEM/" class="nav-logo">AI-<span>CLAW</span>-ECOSYSTEM</a>
+            <div class="nav-links">
+                <a href="https://mk-knight23.github.io/AI-CLAW-ECOSYSTEM/">Hub</a>
+                <a href="https://mk-knight23.github.io/AI-Agent-OpenClaw/">OpenClaw</a>
+                <a href="https://mk-knight23.github.io/AI-Agent-ZeroClaw/">ZeroClaw</a>
+                <a href="https://mk-knight23.github.io/AI-Agent-NanoClaw/">NanoClaw</a>
+                <a href="https://mk-knight23.github.io/AI-Agent-PicoClaw/">PicoClaw</a>
+                <a href="https://mk-knight23.github.io/AI-Agent-Nanobot/">Nanobot</a>
+            </div>
         </div>
+    </nav>
 
-        <a href="https://mk-knight23.github.io/AI-CLAW-ECOSYSTEM/" class="nav-item"
-            style="color: var(--progenitor); border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem;">
-            <svg class="icon-svg">
-                <path d="m12 19-7-7 7-7" />
-                <path d="M19 12H5" />
-            </svg>
-            Genesis Portal
-        </a>
-    </aside>
+    <div class="container">
+        <header class="hero">
+            <div class="hero-badge" data-reveal>Genesis Mainhead / EVO-00</div>
+            <h1 class="hero-title" data-reveal style="transition-delay: 0.1s">
+                The Orchestration<br><span>Authority.</span>
+            </h1>
+            <p class="hero-desc" data-reveal style="transition-delay: 0.2s">
+                OpenClaw is the foundational brain of the distributed matrix. It enforces the RALPH protocol and coordinates a fleet of specialized speciations to achieve 10x development velocity.
+            </p>
+        </header>
 
-    <main>
-        <div class="genesis-badge" data-reveal>Sector: Root / Genesis</div>
-        <h1 data-reveal style="transition-delay: 0.1s">The Orchestration<br>Authority.</h1>
-        <p class="hero-desc" data-reveal style="transition-delay: 0.2s">OpenClaw is the foundational mainhead of the
-            ecosystem. It provides the centralized reasoning and RALPH enforcement for the entire 64-project portfolio.
-        </p>
-
-        <section id="ralph" class="ralph-container">
-            <h2
-                style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.4em; color: var(--text-muted); margin-bottom: 4rem;">
-                [ RALPH PROTOCOL V2.2 ]</h2>
-            <div class="ralph-card" data-reveal>
-                <div class="ralph-node">
-                    <div class="ralph-letter">R</div>
-                    <div class="ralph-label">Research</div>
-                    <div class="ralph-detail">Deep scan of KI artifacts and repo history. [RALPH_V2.md]</div>
+        <section class="section">
+            <div class="card architect-card" data-reveal>
+                <div class="architect-info">
+                    <span class="section-tag">THE ARCHITECT</span>
+                    <h2>Kazi Musharraf</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">AI Engineer & Creator of the RALPH System.</p>
+                    <p>OpenClaw serves as Kazi's primary orchestration engine, managing his 134-agent fleet and 80+ repositories through centralized reasoning and automated state management.</p>
                 </div>
-                <div class="ralph-node">
-                    <div class="ralph-letter">A</div>
-                    <div class="ralph-label">Architect</div>
-                    <div class="ralph-detail">Multi-node sync via Tailscale. [A2UI_CANVAS.md]</div>
-                </div>
-                <div class="ralph-node">
-                    <div class="ralph-letter">L</div>
-                    <div class="ralph-label">Log</div>
-                    <div class="ralph-detail">Continuous state in task.md.</div>
-                </div>
-                <div class="ralph-node">
-                    <div class="ralph-letter">P</div>
-                    <div class="ralph-label">Perform</div>
-                    <div class="ralph-detail">Execution via UI-UX Pro Max.</div>
-                </div>
-                <div class="ralph-node">
-                    <div class="ralph-letter">H</div>
-                    <div class="ralph-label">Harvest</div>
-                    <div class="ralph-detail">Recursive feedback loop optimization.</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div class="stat-item">
+                        <span class="stat-value">134</span>
+                        <span class="stat-label">Agents Managed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">80+</span>
+                        <span class="stat-label">Repositories</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="portfolio" class="stats-grid">
-            <div class="stat-item" data-reveal>
-                <div class="stat-val">1.2k+</div>
-                <div class="stat-lab">GitHub Contributors</div>
-            </div>
-            <div class="stat-item" data-reveal style="transition-delay: 0.1s">
-                <div class="stat-val">59</div>
-                <div class="stat-lab">Official Releases</div>
-            </div>
-            <div class="stat-item" data-reveal style="transition-delay: 0.2s">
-                <div class="stat-val">22</div>
-                <div class="stat-lab">Core Integration Channels</div>
+        <section class="section">
+            <div class="grid-2">
+                <div data-reveal>
+                    <span class="section-tag">TECHNICAL DOCUMENTATION</span>
+                    <h2>Core Intelligence Engine</h2>
+                    <p style="color: var(--text-muted);">Built on Node.js, OpenClaw provides high-level reasoning and multi-agent coordination.</p>
+                    <ul class="tech-list">
+                        <li class="tech-item">Centralized Task Orchestration</li>
+                        <li class="tech-item">RALPH Protocol Enforcement</li>
+                        <li class="tech-item">Multi-Node State Sync</li>
+                        <li class="tech-item">Gateway for Specialized Agents</li>
+                    </ul>
+                </div>
+                <div class="card" data-reveal style="transition-delay: 0.1s">
+                    <h3 style="margin-bottom: 1rem; color: var(--accent);">Distributed Integration</h3>
+                    <p>OpenClaw acts as the primary API bridge, routing complex mission-critical tasks to ZeroClaw (Rust) or deep research queries to Nanobot (Python) based on performance requirements.</p>
+                </div>
             </div>
         </section>
 
-        <section class="repo-map" data-reveal>
-            <div style="position: relative; z-index: 10;">
-                <h2 style="font-size: 2rem; margin-bottom: 1rem;">Distributed Sync Matrix</h2>
-                <p style="color: var(--text-muted); max-width: 500px;">Every dot represents a repository sync node
-                    managed by OpenClaw's primary orchestration engine.</p>
+        <section class="section">
+            <div class="grid-2">
+                <div class="card" data-reveal>
+                    <h3 style="margin-bottom: 1rem; color: var(--accent);">Portfolio Management</h3>
+                    <p>OpenClaw autonomously manages a 64-project portfolio, performing batch README updates, dependency audits, and license synchronization across the entire matrix.</p>
+                </div>
+                <div data-reveal style="transition-delay: 0.1s">
+                    <span class="section-tag">REAL-WORLD AUTOMATION</span>
+                    <h2>Fleet-Scale Deployment</h2>
+                    <p>In Kazi's production environment, OpenClaw handles the simultaneous deployment and monitoring of multiple micro-services, ensuring RALPH compliance at every stage of the lifecycle.</p>
+                </div>
             </div>
-            <div id="dot-field"></div>
         </section>
 
-        <section class="capabilities-matrix" data-reveal>
-            <!-- Column 1: Skills -->
-            <div class="cap-column">
-                <div class="cap-col-header">SKILLS_LIBRARY</div>
-                <div class="skills-cloud">
-                    <span class="skill-node is-active">job-hunter</span>
-                    <span class="skill-node">repo-modernizer</span>
-                    <span class="skill-node">portfolio-manager</span>
-                    <span class="skill-node">content-creator</span>
-                    <span class="skill-node">deploy-everywhere</span>
-                    <span class="skill-node is-active">security-scanner</span>
-                    <span class="skill-node">batch-processor</span>
-                    <span class="skill-node">iot-monitor</span>
-                    <span class="skill-node">pdf-to-quiz-mobile</span>
-                    <span class="skill-node">tts-mobile</span>
-                    <span class="skill-node">claw-ecosystem</span>
-                    <span class="skill-node">add-supabase</span>
-                    <span class="skill-node">add-telegram</span>
-                    <span class="skill-node">add-gmail</span>
-                    <span class="skill-node">add-slack</span>
-                    <span class="skill-node">add-obsidian</span>
-                </div>
-            </div>
-
-            <!-- Column 2: Workflows -->
-            <div class="cap-column">
-                <div class="cap-col-header">ACTIVE_WORKFLOWS</div>
-                <div class="workflow-timeline">
-                    <div class="flow-card">
-                        <div class="flow-name">daily-standup</div>
-                        <div class="flow-trigger">CRON: 09:00 DAILY</div>
-                    </div>
-                    <div class="flow-card">
-                        <div class="flow-name">ralph-evolution</div>
-                        <div class="flow-trigger">CONTINUOUS OPTIMIZATION</div>
-                    </div>
-                    <div class="flow-card">
-                        <div class="flow-name">cd-trigger</div>
-                        <div class="flow-trigger">EVENT: WEBHOOK PUSH</div>
-                    </div>
-                    <div class="flow-card">
-                        <div class="flow-name">job-outreach-pipeline</div>
-                        <div class="flow-trigger">SCHEDULED: MON-FRI</div>
-                    </div>
-                    <div class="flow-card">
-                        <div class="flow-name">swarm-orchestration</div>
-                        <div class="flow-trigger">MANUAL: TEAM-SYNC</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Column 3: Use-Cases -->
-            <div class="cap-column">
-                <div class="cap-col-header">STRATEGIC_USE_CASES</div>
-                <div class="use-case-card">
-                    <div class="use-case-title">SaaS Builder Pro</div>
-                    <div class="use-case-desc">
-                        Rapidly prototype and deploy full-stack AI-integrated SaaS products with automated scaffolding and multi-cloud deployment.
-                    </div>
-                    <div class="use-case-tags">
-                        <span class="tag-pill">AI-AGENT</span>
-                        <span class="tag-pill">FULL-STACK</span>
-                        <span class="tag-pill">AUTO-DEPLOY</span>
-                    </div>
-                </div>
-                <div class="use-case-card" style="margin-top: 1.5rem;">
-                    <div class="use-case-title">60-Repo Portfolio</div>
-                    <div class="use-case-desc">
-                        Autonomous management of massive project portfolios including batch audits and README sync.
-                    </div>
-                    <div class="use-case-tags">
-                        <span class="tag-pill">ORCHESTRATION</span>
-                        <span class="tag-pill">CLEAN-CODE</span>
-                    </div>
-                </div>
+        <section class="section" style="border: none;">
+            <div style="text-align: center;" data-reveal>
+                <span class="section-tag">THE STORY</span>
+                <h2>One Part of the Matrix</h2>
+                <p style="max-width: 800px; margin: 0 auto; color: var(--text-muted);">
+                    OpenClaw is not a siloed tool; it is the commander of an orchestrated matrix. Every action it takes is synchronized with its specialized kin—ZeroClaw, NanoClaw, PicoClaw, and Nanobot—to defy development gravity and achieve the impossible.
+                </p>
             </div>
         </section>
 
         <footer>
-            <div
-                style="display: flex; justify-content: space-between; margin-top: 6rem; color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em;">
-                <span>OPENCLAW SYSTEM • PROGENITOR V2.5 • 16 SKILLS • 11 WORKFLOWS</span>
-                <span>MK-KNIGHT23 • GENESIS_AUTHORIZED</span>
-            </div>
+            AUTHORIZED BY KAZI MUSHARRAF • OPENCLAW V2.5 • © 2025
         </footer>
-    </main>
+    </div>
 
     <script>
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('active');
             });
         }, { threshold: 0.1 });
-
         document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
-
-        // Generate Repo Dots for the Matrix
-        const dotField = document.getElementById('dot-field');
-        for (let i = 0; i < 64; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'repo-dot';
-            dot.style.top = Math.random() * 100 + '%';
-            dot.style.left = Math.random() * 100 + '%';
-            dotField.appendChild(dot);
-        }
     </script>
 </body>
 
